@@ -76,6 +76,9 @@ if st.button("Submit Portfolio"):
                 combined_df,
                 user_weights=user_weights
             )
+            efficient_line_df = efficient_line_df.drop_duplicates(subset="volatility")
+            efficient_line_df = efficient_line_df.sort_values(by="volatility")
+
 
             # Two-column layout
             col1, col2 = st.columns(2)
