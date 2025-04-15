@@ -41,6 +41,9 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
     #     hovertemplate="Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
     # ))
 
+    print(efficient_line_df.head())
+    print(efficient_line_df.tail())
+
     fig.add_trace(go.Scatter(
         x=efficient_line_df["volatility"],
         y=efficient_line_df["returns"],
