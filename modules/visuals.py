@@ -1,8 +1,8 @@
+
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
 import streamlit as st
-import numpy as np
 
 
 
@@ -30,19 +30,18 @@ def plot_price_chart(prices_df):
 def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
     fig = go.Figure()
 
-    # Efficient frontier line
+    # Main efficient frontier line
     fig.add_trace(go.Scatter(
         x=efficient_line_df["volatility"],
         y=efficient_line_df["returns"],
         mode="lines+markers",
-        line=dict(color="blue", width=2),
-        marker=dict(size=6, color="blue"),
+        marker=dict(size=8, color="blue"),
         name="Efficient Frontier",
-        customdata=[list(w) if isinstance(w, (list, tuple, np.ndarray)) else [w] for w in efficient_line_df["weights"]],
+        # customdata=efficient_line_df["weights"].tolist(),  # attach weights to each point
         hovertemplate="Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
     ))
 
-    # User point
+    # Add user's portfolio point
     fig.add_trace(go.Scatter(
         x=[portfolio_point[0]],
         y=[portfolio_point[1]],
@@ -56,7 +55,6 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
         title="Efficient Frontier",
         xaxis_title="Volatility (Risk)",
         yaxis_title="Expected Return",
-        template="plotly_white"
     )
 
     return fig
