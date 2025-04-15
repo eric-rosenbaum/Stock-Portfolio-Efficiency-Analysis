@@ -68,7 +68,7 @@ if st.button("Submit Portfolio"):
             combined_df = pd.concat(price_data, axis=1)
 
             st.write("Combined price data:")
-            st.write(price_data.head())
+            st.write(combined_df.head())
 
             # Calculate frontier and user portfolio
             user_weights = portfolio_df["Weight"].values
