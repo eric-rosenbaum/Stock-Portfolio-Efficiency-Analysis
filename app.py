@@ -110,4 +110,5 @@ if st.button("Submit Portfolio"):
                     })
 
                     st.subheader("Clicked Portfolio Allocation")
-                    st.plotly_chart(plot_allocation_donut(selected_portfolio_df), use_container_width=True)
+                    st.write(selected_portfolio_df)
+                    # st.plotly_chart(plot_allocation_donut(selected_portfolio_df), use_container_width=True)
