@@ -30,12 +30,6 @@ def plot_price_chart(prices_df):
 def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
     fig = go.Figure()
 
-
-    clean_df = efficient_line_df[["volatility", "returns"]].copy()
-    clean_df = clean_df.astype(float)
-    clean_df = clean_df.replace([float("inf"), -float("inf")], float("nan"))
-    clean_df = clean_df.dropna()
-
     # Main efficient frontier line
     # fig.add_trace(go.Scatter(
     #     x=efficient_line_df["volatility"],
@@ -47,10 +41,8 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
     #     hovertemplate="Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
     # ))
 
+
     efficient_line_df = efficient_line_df.iloc[::20]  # take every 20th point
-    st.write(len(efficient_line_df))
-    st.write(efficient_line_df.head())
-    st.write(efficient_line_df.tail())
 
     # fig.add_trace(go.Scatter(
     #     x=efficient_line_df["volatility"].astype(float),
@@ -60,9 +52,16 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
     # ))
 
 
+    x_vals = efficient_line_df["volatility"].astype(float).to_list()
+    y_vals = efficient_line_df["returns"].astype(float).to_list()
+
+    st.write(len(x_vals))
+    st.write(x_vals)
+    st.write(y_vals)
+
     fig.add_trace(go.Scatter(
-        x=[clean_df["volatility"].iloc[0:1]],
-        y=[clean_df["returns"].iloc[0:1]],
+        x=x_vals,
+        y=y_vals,
         mode="markers",
         marker=dict(size=10, color="red", symbol="star"),
         name="Test Frontier",
