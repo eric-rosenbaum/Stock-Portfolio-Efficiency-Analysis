@@ -95,6 +95,8 @@ if st.button("Submit Portfolio"):
                 st.dataframe(efficient_line_df.head())
                 st.dataframe(efficient_line_df.tail())
                 st.write("Shape:", efficient_line_df.shape)
+                st.line_chart(efficient_line_df[["returns"]])
+
 
 
                 with st.container():
