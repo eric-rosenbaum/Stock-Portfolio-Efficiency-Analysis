@@ -91,8 +91,9 @@ if st.button("Submit Portfolio"):
             with col2:
                 # Efficient Frontier with hover tooltip
 
-                st.write("Efficient Frontier DataFrame (first 5 rows):")
+                st.write("Efficient Frontier DataFrame (first then last 5 rows):")
                 st.dataframe(efficient_line_df.head())
+                st.dataframe(efficient_line_df.tail())
                 st.write("Shape:", efficient_line_df.shape)
 
 
