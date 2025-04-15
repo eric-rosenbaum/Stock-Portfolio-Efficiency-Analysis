@@ -31,15 +31,23 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
     fig = go.Figure()
 
     # Main efficient frontier line
+    # fig.add_trace(go.Scatter(
+    #     x=efficient_line_df["volatility"],
+    #     y=efficient_line_df["returns"],
+    #     mode="lines+markers",
+    #     marker=dict(size=8, color="blue"),
+    #     name="Efficient Frontier",
+    #     # customdata=efficient_line_df["weights"].tolist(),  # attach weights to each point
+    #     hovertemplate="Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
+    # ))
+
     fig.add_trace(go.Scatter(
         x=efficient_line_df["volatility"],
         y=efficient_line_df["returns"],
-        mode="lines+markers",
-        marker=dict(size=8, color="blue"),
-        name="Efficient Frontier",
-        # customdata=efficient_line_df["weights"].tolist(),  # attach weights to each point
-        hovertemplate="Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
+        mode="markers",
+        name="Efficient Frontier"
     ))
+
 
     # Add user's portfolio point
     fig.add_trace(go.Scatter(
