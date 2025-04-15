@@ -55,8 +55,8 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
 
 
     fig.add_trace(go.Scatter(
-        x=[efficient_line_df["volatility"].iloc[0:2]],
-        y=[efficient_line_df["returns"].iloc[0:2]],
+        x=[efficient_line_df["volatility"].iloc[0]],
+        y=[efficient_line_df["returns"].iloc[0]],
         mode="markers",
         marker=dict(size=10, color="red", symbol="star"),
         name="Test Frontier",
