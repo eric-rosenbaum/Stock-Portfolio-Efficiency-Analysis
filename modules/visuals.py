@@ -41,6 +41,8 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
     #     hovertemplate="Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
     # ))
 
+    efficient_line_df = efficient_line_df.iloc[::20]  # take every 20th point
+    st.write(len(efficient_line_df))
     st.write(efficient_line_df.head())
     st.write(efficient_line_df.tail())
 
