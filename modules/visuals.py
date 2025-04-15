@@ -30,42 +30,31 @@ def plot_price_chart(prices_df):
 def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
     fig = go.Figure()
 
-    # Main efficient frontier line
-    # fig.add_trace(go.Scatter(
-    #     x=efficient_line_df["volatility"],
-    #     y=efficient_line_df["returns"],
-    #     mode="lines+markers",
-    #     marker=dict(size=8, color="blue"),
-    #     name="Efficient Frontier",
-    #     # customdata=efficient_line_df["weights"].tolist(),  # attach weights to each point
-    #     hovertemplate="Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
-    # ))
-
-
-    efficient_line_df = efficient_line_df.iloc[::20]  # take every 20th point
-
-    # fig.add_trace(go.Scatter(
-    #     x=efficient_line_df["volatility"].astype(float),
-    #     y=efficient_line_df["returns"].astype(float),
-    #     mode="markers",
-    #     marker=dict(size=12, color="blue", opacity=0.8),
-    # ))
-
-
     x_vals = efficient_line_df["volatility"].astype(float).to_list()
     y_vals = efficient_line_df["returns"].astype(float).to_list()
 
-    st.write(len(x_vals))
-    st.write(x_vals)
-    st.write(y_vals)
-
+    # Main efficient frontier line
     fig.add_trace(go.Scatter(
         x=x_vals,
         y=y_vals,
-        mode="markers",
-        marker=dict(size=10, color="red", symbol="star"),
-        name="Test Frontier",
+        mode="lines+markers",
+        marker=dict(size=8, color="blue"),
+        name="Efficient Frontier",
+        # customdata=efficient_line_df["weights"].tolist(),  # attach weights to each point
+        hovertemplate="Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
     ))
+
+
+    # efficient_line_df = efficient_line_df.iloc[::20]  # take every 20th point
+
+
+    # fig.add_trace(go.Scatter(
+    #     x=x_vals,
+    #     y=y_vals,
+    #     mode="markers",
+    #     marker=dict(size=10, color="red", symbol="star"),
+    #     name="Test Frontier",
+    # ))
 
 
 
