@@ -55,15 +55,15 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
 
 
 
-    # Add user's portfolio point
-    fig.add_trace(go.Scatter(
-        x=[portfolio_point[0]],
-        y=[portfolio_point[1]],
-        mode="markers",
-        marker=dict(size=10, color="red", symbol="star"),
-        name="Your Portfolio",
-        hovertemplate="Your Portfolio<br>Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
-    ))
+    # # Add user's portfolio point
+    # fig.add_trace(go.Scatter(
+    #     x=[portfolio_point[0]],
+    #     y=[portfolio_point[1]],
+    #     mode="markers",
+    #     marker=dict(size=10, color="red", symbol="star"),
+    #     name="Your Portfolio",
+    #     hovertemplate="Your Portfolio<br>Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
+    # ))
 
     fig.update_layout(
         title="Efficient Frontier",
