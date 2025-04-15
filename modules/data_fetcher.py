@@ -6,13 +6,14 @@ import os
 import sys
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+import streamlit as st
 
 # Step 1: Fix import path for models
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from data.models import Ticker, Price  # assuming User isn't used yet
 
 # Step 2: Config
-ALPHA_VANTAGE_API_KEY = "V2LN6OWPOA4VJK1L"
+ALPHA_VANTAGE_API_KEY = st.secrets["ALPHA_VANTAGE_API_KEY"]
 BASE_URL = "https://www.alphavantage.co/query"
 DATABASE_URL = 'sqlite:///portfolio.db'
 
