@@ -38,35 +38,21 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
         x=x_vals,
         y=y_vals,
         mode="lines+markers",
-        marker=dict(size=8, color="blue"),
+        marker=dict(size=4, color="blue"),
         name="Efficient Frontier",
         # customdata=efficient_line_df["weights"].tolist(),  # attach weights to each point
         hovertemplate="Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
     ))
 
-
-    # efficient_line_df = efficient_line_df.iloc[::20]  # take every 20th point
-
-
-    # fig.add_trace(go.Scatter(
-    #     x=x_vals,
-    #     y=y_vals,
-    #     mode="markers",
-    #     marker=dict(size=10, color="red", symbol="star"),
-    #     name="Test Frontier",
-    # ))
-
-
-
-    # # Add user's portfolio point
-    # fig.add_trace(go.Scatter(
-    #     x=[portfolio_point[0]],
-    #     y=[portfolio_point[1]],
-    #     mode="markers",
-    #     marker=dict(size=10, color="red", symbol="star"),
-    #     name="Your Portfolio",
-    #     hovertemplate="Your Portfolio<br>Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
-    # ))
+    # Add user's portfolio point
+    fig.add_trace(go.Scatter(
+        x=[portfolio_point[0]],
+        y=[portfolio_point[1]],
+        mode="markers",
+        marker=dict(size=10, color="red", symbol="star"),
+        name="Your Portfolio",
+        hovertemplate="Your Portfolio<br>Return: %{y:.2%}<br>Risk: %{x:.2%}<extra></extra>"
+    ))
 
     fig.update_layout(
         title="Efficient Frontier",
