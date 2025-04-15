@@ -51,6 +51,8 @@ if st.button("Submit Portfolio"):
         one_year_ago = datetime.now().date() - timedelta(days=365)
         price_data = []
 
+
+
         for ticker in portfolio_df["Ticker"]:
             prices = get_ticker_prices(ticker)
             if not prices:
@@ -64,6 +66,9 @@ if st.button("Submit Portfolio"):
 
         if price_data:
             combined_df = pd.concat(price_data, axis=1)
+
+            st.write("Combined price data:")
+            st.dataframe(price_data.head())
 
             # Calculate frontier and user portfolio
             user_weights = portfolio_df["Weight"].values
@@ -82,11 +87,17 @@ if st.button("Submit Portfolio"):
 
             with col2:
                 # Efficient Frontier with hover tooltip
+
+                st.write("Efficient Frontier DataFrame (first 5 rows):")
+                st.dataframe(efficient_line_df.head())
+                st.write("Shape:", efficient_line_df.shape)
+
+
                 with st.container():
                     st.subheader("Efficient Frontier")
                     st.caption("The efficient frontier is created from points, each representing a different " \
-                    "weighting of the stocks present in your portolfio. The breakdowns that have the best level of return" \
-                    "for a given level of risk make up this line")
+                    "weighting of the stocks present in your portolfio. The breakdowns that have the best level of return " \
+                    "for a given level of risk make up this line.")
 
 
                 frontier_fig = plot_efficient_frontier_line(efficient_line_df, user_point)
