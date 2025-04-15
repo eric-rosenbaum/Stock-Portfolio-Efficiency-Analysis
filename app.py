@@ -67,9 +67,6 @@ if st.button("Submit Portfolio"):
         if price_data:
             combined_df = pd.concat(price_data, axis=1)
 
-            st.write("Combined price data:")
-            st.write(combined_df.head())
-
             # Calculate frontier and user portfolio
             user_weights = portfolio_df["Weight"].values
             frontier_df, user_point, efficient_line_df = calculate_user_efficient_frontier(
@@ -90,13 +87,6 @@ if st.button("Submit Portfolio"):
 
             with col2:
                 # Efficient Frontier with hover tooltip
-
-                st.write("Efficient Frontier DataFrame (first then last 5 rows):")
-                st.dataframe(efficient_line_df.head())
-                st.dataframe(efficient_line_df.tail())
-                st.write("Shape:", efficient_line_df.shape)
-                st.line_chart(efficient_line_df[["returns"]])
-
 
 
                 with st.container():
