@@ -45,11 +45,14 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
     st.write(efficient_line_df.tail())
 
     fig.add_trace(go.Scatter(
-        x=efficient_line_df["volatility"],
-        y=efficient_line_df["returns"],
+        x=efficient_line_df["volatility"].astype(float),
+        y=efficient_line_df["returns"].astype(float),
         mode="markers",
+        marker=dict(size=12, color="blue", opacity=0.8),
         name="Efficient Frontier"
     ))
+
+
 
 
     # Add user's portfolio point
