@@ -13,8 +13,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from data.models import Ticker, Price  # assuming User isn't used yet
 
 # Step 2: Config
-# ALPHA_VANTAGE_API_KEY = st.secrets["ALPHA_VANTAGE_API_KEY"]
-ALPHA_VANTAGE_API_KEY = "temp"
+ALPHA_VANTAGE_API_KEY = st.secrets["ALPHA_VANTAGE_API_KEY"]
+# ALPHA_VANTAGE_API_KEY = "temp"
 
 BASE_URL = "https://www.alphavantage.co/query"
 DATABASE_URL = 'sqlite:///portfolio.db'
