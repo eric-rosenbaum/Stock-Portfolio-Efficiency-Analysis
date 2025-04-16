@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 
 def calculate_user_efficient_frontier(price_df, num_portfolios=5000, risk_free_rate=0.02, user_weights=None):
+    np.random.seed(42)
     price_df = price_df.head(252)
     daily_returns = price_df.pct_change().dropna()
     mean_returns = daily_returns.mean()
@@ -50,3 +51,28 @@ def calculate_user_efficient_frontier(price_df, num_portfolios=5000, risk_free_r
         user_point = (user_volatility, user_return)
 
     return df, user_point, efficient_line_df
+
+
+def risk_return_by_stock(price_df):
+    """
+    Takes a DataFrame with 'date' and one column per stock ticker.
+    Returns a DataFrame with annualized return and volatility for each stock.
+    Assumes data is already filtered to 1 year.
+    """
+    tickers = price_df.columns
+    results = []
+
+    for ticker in tickers:
+        prices = price_df[ticker].dropna()
+        daily_returns = prices.pct_change().dropna()
+
+        annual_return = daily_returns.mean() * 252
+        annual_volatility = daily_returns.std() * np.sqrt(252)
+
+        results.append({
+            "Ticker": ticker,
+            "Return": annual_return,
+            "Volatility": annual_volatility
+        })
+
+    return pd.DataFrame(results)

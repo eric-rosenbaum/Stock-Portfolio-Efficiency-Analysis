@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
-from modules.visuals import plot_allocation_donut, plot_efficient_frontier_line
-from modules.portfolio_math import calculate_user_efficient_frontier
+from modules.visuals import plot_allocation_donut, plot_efficient_frontier_line, plot_stock_risk_return_scatter
+from modules.portfolio_math import calculate_user_efficient_frontier, risk_return_by_stock
 from modules.data_fetcher import get_ticker_prices, fetch_data
 from streamlit_plotly_events import plotly_events
 import plotly.io as pio
@@ -76,14 +76,22 @@ if st.button("Submit Portfolio"):
             efficient_line_df = efficient_line_df.drop_duplicates(subset="volatility")
             efficient_line_df = efficient_line_df.sort_values(by="volatility")
 
+            risk_return = risk_return_by_stock(combined_df)
 
             # Two-column layout
             col1, col2 = st.columns(2)
 
             with col1:
                 st.subheader("Allocation Breakdown")
+                st.caption("The annualized return and volitiliy of these stocks are calculated using 1 year of data. " \
+                "Volitility is calculated using the standard deviation of returns, and annual expected return is " \
+                "the stock's price change in the last year.")
                 donut_fig = plot_allocation_donut(portfolio_df)
                 st.plotly_chart(donut_fig, use_container_width=True)
+
+                st.subheader("Individual Stock Risk vs Return")
+                fig = plot_stock_risk_return_scatter(risk_return)
+                st.plotly_chart(fig, use_container_width=True)
 
             with col2:
                 # Efficient Frontier with hover tooltip
@@ -99,16 +107,16 @@ if st.button("Submit Portfolio"):
                 frontier_fig = plot_efficient_frontier_line(efficient_line_df, user_point)
                 selected_points = plotly_events(frontier_fig, click_event=True, key="frontier_click")
 
-                if selected_points:
-                    point_index = selected_points[0]["pointIndex"]
-                    selected_weights = efficient_line_df.iloc[point_index]["weights"]
-                    tickers = combined_df.columns.tolist()
+                # if selected_points:
+                #     point_index = selected_points[0]["pointIndex"]
+                #     selected_weights = efficient_line_df.iloc[point_index]["weights"]
+                #     tickers = combined_df.columns.tolist()
 
-                    selected_portfolio_df = pd.DataFrame({
-                        "Ticker": tickers,
-                        "Weight": selected_weights
-                    })
+                #     selected_portfolio_df = pd.DataFrame({
+                #         "Ticker": tickers,
+                #         "Weight": selected_weights
+                #     })
 
-                    st.subheader("Clicked Portfolio Allocation")
-                    st.write(selected_portfolio_df)
+                #     st.subheader("Clicked Portfolio Allocation")
+                #     st.write(selected_portfolio_df)
                     # st.plotly_chart(plot_allocation_donut(selected_portfolio_df), use_container_width=True)

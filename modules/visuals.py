@@ -61,3 +61,37 @@ def plot_efficient_frontier_line(efficient_line_df, portfolio_point):
     )
 
     return fig
+
+
+import plotly.express as px
+
+def plot_stock_risk_return_scatter(risk_return_df):
+    """
+    Plots a scatter plot of individual stocks' risk vs return.
+    
+    Parameters:
+    - risk_return_df: DataFrame with columns 'Ticker', 'Return', 'Volatility'
+
+    Returns:
+    - A Plotly figure object
+    """
+    fig = px.scatter(
+        risk_return_df,
+        x="Volatility",
+        y="Return",
+        text="Ticker"
+    )
+
+    fig.update_traces(
+        textposition="top center",
+        marker=dict(size=10, color="blue", opacity=0.8)
+    )
+
+    fig.update_layout(
+        xaxis_title="Annual Volatility (Risk)",
+        yaxis_title="Annual Expected Return",
+        template="plotly_white",
+        height=500
+    )
+
+    return fig
